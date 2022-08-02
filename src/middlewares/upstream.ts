@@ -22,6 +22,7 @@ export const getURL = (
     domain,
     port,
     protocol,
+    pathRewrite,
   } = upstream;
 
   cloneURL.hostname = domain;
@@ -34,6 +35,10 @@ export const getURL = (
     cloneURL.port = '';
   } else {
     cloneURL.port = port.toString();
+  }
+
+  if (pathRewrite) {
+    cloneURL.pathname = pathRewrite(cloneURL.pathname);
   }
 
   return cloneURL.href;

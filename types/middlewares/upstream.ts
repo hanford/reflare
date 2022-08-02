@@ -4,4 +4,5 @@ export interface UpstreamOptions {
   port?: number;
   timeout?: number;
   weight?: number;
+  pathRewrite?: (p: string) => string;
 }
