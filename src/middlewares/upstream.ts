@@ -49,11 +49,14 @@ export const useUpstream: Middleware = async (
   context,
   next,
 ) => {
-  const { request, upstream, onRequest, onResponse } = context;
+  const { request, upstream } = context;
+
   if (upstream === null) {
     await next();
     return;
   }
+
+  const { onRequest, onResponse } = upstream;
 
   const url = getURL(
     request.url,

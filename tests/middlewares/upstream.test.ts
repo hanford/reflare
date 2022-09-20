@@ -24,11 +24,10 @@ test('upstream -> onRequest', async () => {
     path: '/foo*',
     upstream: {
       domain: 'httpbin.org',
-    },
-    onRequest: (_req, url) => {
-      const next: string = url.replace('foo/bar/baz', 'get');
-
-      return new Request(next);
+      onRequest: (_req, url) => {
+        const next: string = url.replace('foo/bar/baz', 'get');
+        return new Request(next);
+      },
     },
   });
 
@@ -47,11 +46,11 @@ test('upstream -> onRespone', async () => {
     path: '/foo*',
     upstream: {
       domain: 'httpbin.org',
-    },
-    onResponse: (res: Response): Response => {
-      const result = 1 + 1;
-      res.headers.set('x-foo', result.toString());
-      return res;
+      onResponse: (res: Response): Response => {
+        const result = 1 + 1;
+        res.headers.set('x-foo', result.toString());
+        return res;
+      },
     },
   });
 
