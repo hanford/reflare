@@ -73,12 +73,14 @@ export const useUpstream: Middleware = async (
       : [upstream.onResponse]
     : null;
 
-    if (onRequest) {
-      upstreamRequest = onRequest.reduce(
-        (prevReq: Request, fn: onRequestCallback) => fn(cloneRequest(url, prevReq), url),
-        upstreamRequest,
-      );
-    }
+  let upstreamRequest = cloneRequest(url, request);
+
+  if (onRequest) {
+    upstreamRequest = onRequest.reduce(
+      (prevReq: Request, fn: onRequestCallback) => fn(cloneRequest(url, prevReq), url),
+      upstreamRequest,
+    );
+  }
 
   context.response = await fetch(upstreamRequest);
 
