@@ -41,3 +41,7 @@ export const isSameOrigin = (
   }
   return true;
 };
+
+export const convertToArray = (maybeArray: any): any[] => {
+  return Array.isArray(maybeArray) ? maybeArray : [maybeArray]
+};

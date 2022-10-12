@@ -1,5 +1,5 @@
-export type onResponseCallback = (k: Response, url: string) => Response;
-export type onRequestCallback = (k: Request, url: string) => Request;
+export type onResponseCallback = (response: Response, url: string) => Response;
+export type onRequestCallback = (request: Request, url: string) => Request;
 
 export interface UpstreamOptions {
   domain: string;
