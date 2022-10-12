@@ -1,6 +1,6 @@
 import { Middleware } from '../../types/middleware';
 import { UpstreamOptions, onResponseCallback, onRequestCallback } from '../../types/middlewares/upstream';
-import { convertToArray } from '../utils'
+import { convertToArray } from '../utils';
 
 export const cloneRequest = (
   url: string,
@@ -62,8 +62,13 @@ export const useUpstream: Middleware = async (
     upstream,
   );
 
-  const onRequest: onRequestCallback[] | null = upstream.onRequest ? convertToArray(upstream.onRequest) : null
-  const onResponse: onResponseCallback[] | null = upstream.onResponse ? convertToArray(upstream.onResponse) : null
+  const onRequest = upstream.onRequest
+    ? convertToArray<onRequestCallback>(upstream.onRequest)
+    : null;
+
+  const onResponse = upstream.onResponse
+    ? convertToArray<onResponseCallback>(upstream.onResponse)
+    : null;
 
   let upstreamRequest = cloneRequest(url, request);
 
